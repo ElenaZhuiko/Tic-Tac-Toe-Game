@@ -1,4 +1,4 @@
-package com.tjv;
+package com.tjv.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -6,14 +6,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class Model {
-    class Coordinate{
-        int indexRow;
-        int indexColumn;
-        Coordinate(int x, int y){
-            indexRow = x;
-            indexColumn = y;
-        }
-    }
+
     static char board [][] =  { {' ', ' ', ' '},
                                 {' ', ' ', ' '},
                                 {' ', ' ', ' '}};
@@ -119,7 +112,7 @@ public class Model {
         }
         return new Coordinate(indexLine, indexColumn);
     }
-
+//        solution.start( solution.chooseFirstStep());
     void clear(Coordinate coordinate){
         board[coordinate.indexRow][coordinate.indexColumn] = ' ';
     }
@@ -162,30 +155,22 @@ public class Model {
         return result;
     }
 
-    void start(boolean computer){
-        while(!endGame){
+    void step(boolean computer, Coordinate coordinate){
             if (computer){
                 minimax(true, 0);
-            }else {
-                bestCoordinate = readInput();
-            }
+            }else { bestCoordinate = coordinate; }
             moving(bestCoordinate,computer);
             printBoard();
-            computer = !computer;
-        }
-        int resultGame = score();
-        if (resultGame == 10){ System.out.println("I win"); }
-        else if(resultGame == -10)  System.out.println("You win");
-        else  System.out.println("Game is over");
     }
 
-    static boolean chooseFirstStep(){
-        Scanner sc = new Scanner(System.in);
-        while(true){
-            String st = sc.nextLine();
-            if(st.equals("I")) return false;
-            else if(st.equals("you")) return true;
-            else { System.out.println("Wrong data"); }
-        }
-    }
+//    static boolean chooseFirstStep(String st){
+////        Scanner sc = new Scanner(System.in);
+////        while(true){
+////            String st = sc.nextLine();
+//            if(st.equals("I")) return false;
+//            else if(st.equals("you")) return true;
+////            else { System.out.println("Wrong data"); }
+////        }
+//        return false;
+//    }
 }
