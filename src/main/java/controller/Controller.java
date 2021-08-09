@@ -1,24 +1,20 @@
-package com.tjv.controller;
-import com.tjv.Wrapper;
-import com.tjv.model.Coordinate;
-import com.tjv.model.Model;
-import com.tjv.view.VisualizationImpl;
+package main.java.controller;
+import main.java.model.Coordinate;
+import main.java.Wrapper;
+import main.java.model.Model;
+import main.java.view.VisualizationTelegram;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
-import static com.tjv.controller.BotState.*;
-
 @Component
 public class Controller {
     private  Model model;
-    private  VisualizationImpl view;
-
-    public Controller(){}
+    private VisualizationTelegram view;
 
     @Autowired
-    public Controller(Model model, VisualizationImpl view){
+    public Controller(Model model, VisualizationTelegram view){
         this.model = model;
         this.view = view;
         startGame();
@@ -33,23 +29,23 @@ public class Controller {
         String chatId = answer.getChatId();
         int gameResult = checkBoard(answer.getBoard());
         if (gameResult != -1 ){
-            answer.state = END_GAME;
+            answer.state = BotState.END_GAME;
         }
-        if(answer.state.equals(START_GAME)){
-            answer.state = CHOOSE_SIGH;
+        if(answer.state.equals(BotState.START_GAME)){
+            answer.state = BotState.CHOOSE_SIGH;
             view.chooseForChoice(chatId);
-        }else if (answer.state.equals(USER_STEP)){
+        }else if (answer.state.equals(BotState.USER_STEP)){
             view.printBoard("your turn", chatId);
-        }else if (answer.state.equals(COMPUTER_STEP)){
+        }else if (answer.state.equals(BotState.COMPUTER_STEP)){
             answer.changeBoard(model.step(answer), false);
-            answer.state = USER_STEP;
+            answer.state = BotState.USER_STEP;
             view.printBoard("computers step", chatId);
             gameResult = checkBoard(answer.getBoard());
             if (gameResult != -1){
-                answer.state = END_GAME;
+                answer.state = BotState.END_GAME;
                 view.endGame(gameResult, chatId);
             }
-        }else if(answer.state.equals(END_GAME)){
+        }else if(answer.state.equals(BotState.END_GAME)){
             view.endGame(gameResult, chatId);
         }
     }

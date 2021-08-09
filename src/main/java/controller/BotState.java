@@ -1,4 +1,4 @@
-package com.tjv.controller;
+package main.java.controller;
 
 public enum BotState {
     CHOOSE_SIGH,

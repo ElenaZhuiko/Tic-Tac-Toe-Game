@@ -1,6 +1,6 @@
-package com.tjv.view;
+package main.java.view;
 
-import com.tjv.controller.Controller;
+import main.java.controller.Controller;
 
 public interface Visualization {
     void run(Controller controller);

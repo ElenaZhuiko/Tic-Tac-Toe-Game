@@ -1,6 +1,6 @@
-package com.tjv.model;
+package main.java.model;
 
-import com.tjv.Wrapper;
+import main.java.Wrapper;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,7 +9,6 @@ import java.util.Set;
 
 @Component
 public class Model {
-    Wrapper dataForGame;
     private char board [][];
     private char  yourSign;
     private char  oppositeSign;
@@ -144,18 +143,4 @@ public class Model {
         return bestCoordinate;
     }
 
-    //    Coordinate readInput(){
-//        Scanner sc = new Scanner(System.in);
-//        int indexLine, indexColumn;
-//        while (true){
-//            indexLine = sc.nextInt();
-//            indexColumn = sc.nextInt();
-//            if (indexLine < 0 || indexColumn < 0 || indexLine > 2|| indexColumn > 2){
-//                System.out.println("This position is off the bounds of the board! Try again.");
-//            }else if (board[indexLine][indexColumn] != ' '){
-//                System.out.println("Someone has already made a move at this position! Try again.");
-//            }else { break; }
-//        }
-//        return new Coordinate(indexLine, indexColumn);
-//    }
 }

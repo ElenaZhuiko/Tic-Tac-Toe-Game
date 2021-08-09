@@ -1,4 +1,4 @@
-package com.tjv;
+package main.java;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

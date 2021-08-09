@@ -1,4 +1,4 @@
-package com.tjv.model;
+package main.java.model;
 
 public class Coordinate{
         public int indexRow;

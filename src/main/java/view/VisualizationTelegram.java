@@ -1,8 +1,10 @@
-package com.tjv.view;
+package main.java.view;
 
-import com.tjv.Wrapper;
-import com.tjv.controller.Controller;
-import com.tjv.model.Coordinate;
+import main.java.controller.BotState;
+import main.java.model.Coordinate;
+import main.java.Wrapper;
+import main.java.controller.Controller;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
@@ -17,13 +19,15 @@ import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
 
 import java.util.*;
 
-import static com.tjv.controller.BotState.*;
-
 @Component
-public class VisualizationImpl  extends TelegramLongPollingBot implements Visualization{
+public class VisualizationTelegram  extends TelegramLongPollingBot implements Visualization{
     private Controller controller;
     private Map<String, Wrapper> clients;
 
+    @Value("${VisualizationTelegram.TOKEN}")
+    private String TOKEN;
+    @Value("${VisualizationTelegram.BOT_NAME}")
+    private String BOT_NAME;
     static { ApiContextInitializer.init(); }
 
     public void run(Controller controller){
@@ -118,27 +122,27 @@ public class VisualizationImpl  extends TelegramLongPollingBot implements Visual
             if (answer == null){
                 sendMessage("Wrong", chatId );
             }else {
-                if (call_data.equals("user_step_first") && answer.state.equals(CHOOSE_SIGH)) {
+                if (call_data.equals("user_step_first") && answer.state.equals(BotState.CHOOSE_SIGH)) {
                     sendMessage("You are first", chatId);
                     answer.setFirstStepUser(true);
-                    answer.state = USER_STEP;
-                } else if (call_data.equals("computer_step_first") && answer.state.equals(CHOOSE_SIGH)) {
+                    answer.state = BotState.USER_STEP;
+                } else if (call_data.equals("computer_step_first") && answer.state.equals(BotState.CHOOSE_SIGH)) {
                     sendMessage("Computer is first", chatId);
                     answer.setFirstStepUser(false);
-                    answer.state = COMPUTER_STEP;
-                } else if (call_data.matches(".*\\d.*") && answer.state.equals(USER_STEP)) {
+                    answer.state = BotState.COMPUTER_STEP;
+                } else if (call_data.matches(".*\\d.*") && answer.state.equals(BotState.USER_STEP)) {
                     Coordinate coordinate = new Coordinate(Integer.parseInt(call_data.split("_")[0]),
                             Integer.parseInt(call_data.split("_")[1]));
                     if (answer.changeBoard(coordinate, true)) {
                         printBoard("Your step", chatId);
-                        answer.state = COMPUTER_STEP;
+                        answer.state = BotState.COMPUTER_STEP;
                     } else {
                         sendMessage("Try again", chatId);
                     }
                 } else if (call_data.equals("new_game")) {
-                    answer.state = START_GAME;
+                    answer.state = BotState.START_GAME;
                 } else if (call_data.equals("end_game")) {
-                    answer.state = WAIT;
+                    answer.state = BotState.WAIT;
                 }
                 controller.analysisAnswer(answer);
             }
@@ -176,9 +180,10 @@ public class VisualizationImpl  extends TelegramLongPollingBot implements Visual
             sendMessage("Game is over", id);
         }
         InlineKeyboardMarkup newGameAsk = makeKeyBoardForNewGame();
-        sendMessage("Do you want a new game?",id, newGameAsk);
+       sendMessage("Do you want a new game?",id, newGameAsk);
         clients.get(id).cleanData();
     }
+
     @Override
     public String getBotUsername() {
         return BOT_NAME;
@@ -188,5 +193,4 @@ public class VisualizationImpl  extends TelegramLongPollingBot implements Visual
     public String getBotToken() {
         return TOKEN;
     }
-
 }

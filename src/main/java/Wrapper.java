@@ -1,7 +1,7 @@
-package com.tjv;
+package main.java;
 
-import com.tjv.controller.BotState;
-import com.tjv.model.Coordinate;
+import main.java.controller.BotState;
+import main.java.model.Coordinate;
 
 public class Wrapper {
     private char[][] board;
