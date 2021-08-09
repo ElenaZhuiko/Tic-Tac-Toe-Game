@@ -24,7 +24,6 @@ public class VisualizationImpl  extends TelegramLongPollingBot implements Visual
     private Controller controller;
     private Map<String, Wrapper> clients;
 
-
     static { ApiContextInitializer.init(); }
 
     public void run(Controller controller){
