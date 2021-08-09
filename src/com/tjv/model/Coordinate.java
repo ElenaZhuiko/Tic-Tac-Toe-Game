@@ -1,8 +1,8 @@
 package com.tjv.model;
 
 public class Coordinate{
-        int indexRow;
-        int indexColumn;
+        public int indexRow;
+        public int indexColumn;
 
         public Coordinate(int x, int y){
             indexRow = x;

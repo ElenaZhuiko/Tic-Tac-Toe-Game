@@ -3,17 +3,25 @@ import com.tjv.Wrapper;
 import com.tjv.model.Coordinate;
 import com.tjv.model.Model;
 import com.tjv.view.VisualizationImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 
 import static com.tjv.controller.BotState.*;
 
+@Component
 public class Controller {
-    private final Model model;
-    private final VisualizationImpl view;
+    private  Model model;
+    private  VisualizationImpl view;
 
+    public Controller(){}
+
+    @Autowired
     public Controller(Model model, VisualizationImpl view){
         this.model = model;
         this.view = view;
+        startGame();
     }
 
     public void startGame(){
@@ -22,25 +30,27 @@ public class Controller {
     }
 
     public void analysisAnswer(Wrapper answer){
+        String chatId = answer.getChatId();
         int gameResult = checkBoard(answer.getBoard());
         if (gameResult != -1 ){
             answer.state = END_GAME;
         }
         if(answer.state.equals(START_GAME)){
-            view.chooseForChoice();
+            answer.state = CHOOSE_SIGH;
+            view.chooseForChoice(chatId);
         }else if (answer.state.equals(USER_STEP)){
-            view.printBoard("your turn");
+            view.printBoard("your turn", chatId);
         }else if (answer.state.equals(COMPUTER_STEP)){
             answer.changeBoard(model.step(answer), false);
             answer.state = USER_STEP;
-            view.printBoard("computers step");
+            view.printBoard("computers step", chatId);
             gameResult = checkBoard(answer.getBoard());
             if (gameResult != -1){
                 answer.state = END_GAME;
-                view.endGame(gameResult);
+                view.endGame(gameResult, chatId);
             }
         }else if(answer.state.equals(END_GAME)){
-            view.endGame(gameResult);
+            view.endGame(gameResult, chatId);
         }
     }
 

@@ -4,9 +4,7 @@ import com.tjv.controller.BotState;
 import com.tjv.model.Coordinate;
 
 public class Wrapper {
-    private char board [][] =  { {' ', ' ', ' '},
-            {' ', ' ', ' '},
-            {' ', ' ', ' '}};
+    private char[][] board;
 
     public BotState state;
     private boolean firstStepUser;
@@ -15,7 +13,7 @@ public class Wrapper {
     private char  oppositeSign;
 
     public Wrapper(String chatId){
-        state = BotState.START_GAME;
+        cleanData();
         this.chatId = chatId;
     }
     public void cleanData(){
@@ -43,9 +41,6 @@ public class Wrapper {
         }
     }
 
-    public void setChatId(String chatId) {
-        this.chatId = chatId;
-    }
     public char[][] getBoard() {
         return board;
     }

@@ -1,12 +1,9 @@
 package com.tjv;
 
-import com.tjv.view.VisualizationImpl;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
     public static void main(String[] args) {
-        Model model = new Model();
-//        solution.start( solution.chooseFirstStep());
-        VisualizationImpl view = new VisualizationImpl();
-        Controller controller = new Controller(model, view);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     }
 }
