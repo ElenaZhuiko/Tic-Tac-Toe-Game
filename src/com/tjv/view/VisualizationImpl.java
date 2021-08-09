@@ -23,8 +23,7 @@ import static com.tjv.controller.BotState.*;
 public class VisualizationImpl  extends TelegramLongPollingBot implements Visualization{
     private Controller controller;
     private Map<String, Wrapper> clients;
-    private static final String TOKEN = "982235083:AAFPpwkdHMcmGvnEUBqB5B8asAF3K_fjUfw";
-    private static final String BOT_NAME = "name_test_for_bot";
+
 
     static { ApiContextInitializer.init(); }
 
