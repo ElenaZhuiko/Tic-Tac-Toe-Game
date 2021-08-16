@@ -2,6 +2,7 @@ package main.java.controller;
 import main.java.model.Coordinate;
 import main.java.Wrapper;
 import main.java.model.Model;
+import main.java.view.Visualization;
 import main.java.view.VisualizationTelegram;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,10 +12,10 @@ import java.util.ArrayList;
 @Component
 public class Controller {
     private  Model model;
-    private VisualizationTelegram view;
+    private Visualization view;
 
     @Autowired
-    public Controller(Model model, VisualizationTelegram view){
+    public Controller(Model model, Visualization view){
         this.model = model;
         this.view = view;
         startGame();

@@ -8,13 +8,16 @@ public class Wrapper {
 
     public BotState state;
     private boolean firstStepUser;
-    private String chatId;
+    private String chatId = "";
     private char  yourSign;
     private char  oppositeSign;
 
     public Wrapper(String chatId){
         cleanData();
         this.chatId = chatId;
+    }
+    public Wrapper(){
+        cleanData();
     }
     public void cleanData(){
         state = BotState.START_GAME;
