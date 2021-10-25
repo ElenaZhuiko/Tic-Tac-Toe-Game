@@ -1,9 +1,9 @@
 package main.java.controller;
+
 import main.java.model.Coordinate;
-import main.java.Wrapper;
 import main.java.model.Model;
+import main.java.model.Wrapper;
 import main.java.view.Visualization;
-import main.java.view.VisualizationTelegram;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 @Component
 public class Controller {
-    private  Model model;
+    private Model model;
     private Visualization view;
 
     @Autowired

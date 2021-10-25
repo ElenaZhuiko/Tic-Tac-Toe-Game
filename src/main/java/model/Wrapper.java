@@ -1,7 +1,7 @@
-package main.java;
+package main.java.model;
+
 
 import main.java.controller.BotState;
-import main.java.model.Coordinate;
 
 public class Wrapper {
     private char[][] board;

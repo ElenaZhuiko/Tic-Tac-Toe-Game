@@ -1,6 +1,5 @@
 package main.java.model;
 
-import main.java.Wrapper;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

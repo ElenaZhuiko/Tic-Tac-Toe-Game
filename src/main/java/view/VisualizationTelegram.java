@@ -1,9 +1,9 @@
 package main.java.view;
 
 import main.java.controller.BotState;
-import main.java.model.Coordinate;
-import main.java.Wrapper;
 import main.java.controller.Controller;
+import main.java.model.Coordinate;
+import main.java.model.Wrapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.ApiContextInitializer;
@@ -19,7 +19,6 @@ import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
 
 import java.util.*;
 
-@Component
 public class VisualizationTelegram  extends TelegramLongPollingBot implements Visualization{
     private Controller controller;
     private Map<String, Wrapper> clients;
