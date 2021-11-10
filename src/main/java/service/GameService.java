@@ -1,5 +1,6 @@
 package main.java.service;
 
+import main.java.dao.CrudRepository;
 import main.java.dao.GameRepository;
 import main.java.domain.Game;
 import main.java.domain.OnCreate;
@@ -12,8 +13,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class GameService extends AbstractCrudService<Integer, Game>{
-    private final UserService userService = new UserService();
-    public GameService(){ super(new GameRepository());}
+    private final UserService userService;
+    public GameService(CrudRepository<Integer, Game> repository, UserService userService){
+        super(repository);
+        this.userService = userService;
+    }
 
     @Override
     public void deleteById(Integer id){

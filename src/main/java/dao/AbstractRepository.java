@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
-public abstract class AbstractRepository<K, E>  {
+public abstract class AbstractRepository<K, E> implements CrudRepository<K, E> {
     private final Path fileDatabasePath;
     private final Map<K, E> inMemoryDb = new HashMap<>();
 

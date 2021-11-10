@@ -1,15 +1,16 @@
 package main.java.service;
 
 import main.java.dao.AbstractRepository;
+import main.java.dao.CrudRepository;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Optional;
 
 public abstract class AbstractCrudService<K, E> {
-    protected final AbstractRepository<K, E> repository;
+    protected final CrudRepository<K, E> repository;
 
-    protected AbstractCrudService(AbstractRepository<K, E> repository) {
+    protected AbstractCrudService(CrudRepository<K, E> repository) {
         this.repository = repository;
     }
 

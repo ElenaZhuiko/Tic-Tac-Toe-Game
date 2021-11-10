@@ -12,8 +12,8 @@ import java.util.function.Consumer;
 
 
 public class CliMain {
-    private UserService userService = new UserService();
-    private GameService gameService = new GameService();
+    private UserService userService;
+    private GameService gameService;
 
     public static void main(String[] args) {
         CliMain cliMain = new CliMain();
